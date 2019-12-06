@@ -1,0 +1,56 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 22, 2018, 5:43:07 PM
+    Author     : Elnic
+*/
+
+.jumbotron {
+    
+    color:white;
+    padding: 100px 25px;
+}
+footer .glyphicon {
+    font-size: 20px;
+}
+.container {
+    padding-left: -100px;
+    padding-right: -100px;
+}
+.container-fluid {
+    padding: 60px 50px;
+}
+.logo {
+    font-size:150pt;
+        color:dodgerblue;
+}
+.navbar {
+    margin-bottom:0;
+    background-color:dodgerblue;
+    z-index:9999;
+    border:0;
+    font-size:12px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 4px;
+    border-radius: 0;
+}
+.navbar li a, .navbar .navbar-brand {
+    color: #fff !important;
+}
+.navbar-nav li a:hover, .navbar-nav li.active a {
+    color: black !important;
+    background-color: white !important;
+}
+.navbar-default .navbar-toggle {
+    border-color:transparent;
+    color: #fff !important;
+}
+@media screen and (max-width: 768px) {
+    .col-sm-4 {
+        text-align:center;
+        margin: 25px 0;
+    }
+}
