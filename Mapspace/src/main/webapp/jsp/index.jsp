@@ -72,7 +72,8 @@
                         <br/>
                         <a href="<c:url value="/j_spring_security_logout"/>"><input type="submit" class="btn btn-default" value="Logout"/></a>
                         <br/>
-                        
+                        <hr/>
+                        <a href="${pageContext.request.contextPath}/createUser"><input type="submit" class="btn btn-default" value="Sign Up"/></a>
                     </div>
                     <hr/>
                     <div id="news">

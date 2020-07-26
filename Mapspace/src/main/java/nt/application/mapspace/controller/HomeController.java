@@ -49,6 +49,13 @@ public class HomeController {
         return lDao.loadLocations(user.getId());
     }
     
+    //load user creation page
+    @RequestMapping(value="/createUser", method=RequestMethod.GET)
+    public String addUser(Model model) {
+        model.addAttribute("user", new User());
+        return "/user/createUser";
+    }
+    
     
     
 }
