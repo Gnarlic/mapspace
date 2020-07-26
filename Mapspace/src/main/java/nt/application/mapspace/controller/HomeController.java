@@ -5,17 +5,21 @@
  */
 package nt.application.mapspace.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import nt.application.mapspace.dao.LocationDao;
 import nt.application.mapspace.dao.LocationDaoDbImpl;
 import nt.application.mapspace.dao.UserDao;
 import nt.application.mapspace.model.Location;
 import nt.application.mapspace.model.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -55,6 +59,25 @@ public class HomeController {
         model.addAttribute("user", new User());
         return "/user/createUser";
     }
+    
+    @RequestMapping(value="/addUser", method=RequestMethod.POST)
+    public String insertUser(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("user", new User());
+            return "/user/createUser";
+        } else {
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            String hashedPw = encoder.encode(user.getPassword());
+            user.setPassword(hashedPw);
+            ArrayList<String> authorities = new ArrayList<>();
+            authorities.add("ROLE_USER");
+            user.setAuthorities(authorities);
+            uDao.addUser(user);
+            model.addAttribute("location", new Location());
+            return "index";
+        }
+    }
+    
     
     
     

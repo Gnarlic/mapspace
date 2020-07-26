@@ -30,12 +30,12 @@ public class UserController {
         this.pwenc = pwenc;
     }
     
-    @RequestMapping(value="/addUser", method = RequestMethod.POST)
-    public String addUser(HttpServletRequest req) {
-        User newUser = new User();
-        newUser.setUsername(req.getParameter("username"));
-        newUser.setPassword(req.getParameter("password"));
-        return "redirect:/";
-    }
+//    @RequestMapping(value="/addUser", method = RequestMethod.POST)
+//    public String addUser(HttpServletRequest req) {
+//        User newUser = new User();
+//        newUser.setUsername(req.getParameter("username"));
+//        newUser.setPassword(req.getParameter("password"));
+//        return "redirect:/";
+//    }
     
 }

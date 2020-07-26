@@ -24,7 +24,7 @@
         <div class="container-fluid">
             <div class="row">
 
-                <div class=" col-2 px-1 position-fixed text-center" id="sidebar" style="height:100vh;background-color:#C6D0E0">
+                <div class=" col-md-2 px-1 position-fixed text-center" id="sidebar" style="height:100vh;background-color:#C6D0E0">
                     <div id="user" style="padding-top:10px">
                         <c:if test="${pageContext.request.userPrincipal.name != null}">
                             hello, ${pageContext.request.userPrincipal.name}
@@ -72,20 +72,46 @@
                         <br/>
                         <a href="<c:url value="/j_spring_security_logout"/>"><input type="submit" class="btn btn-default" value="Logout"/></a>
                         <br/>
-                        
+
                     </div>
                     <hr/>
                     <div id="news">
 
                     </div>
-                    <div id="map-functions">
 
+                </div>
+                <div id="userForm" class="col offset-2">
+                    <div id="map-functions">
+                        <div><h1 class="text-center">
+                            Create Account
+                            </h1></div>
+                        <sf:form class="form-vertical" role="form" modelAttribute="user"
+                                 method="POST" action="addUser">
+                            <div class="container">
+                                <sf:errors path="" cssClass="error" element="div"/>
+                            </div>
+                            <div class="form-group" style="text-align:center;margin: 0 auto">
+                                <label for="user-name" class="col-md-2 control-label">Username: </label>
+                                <div class="col-md-4">
+                                    <sf:input type="text" class="form-control" id="user-name" name="userName"
+                                              path="username" placeholder="username" required="required"/>
+                                </div>
+                                <label for="pass-word" class="col-md-2 control-label">Password: </label>
+                                <div class="col-md-4">
+                                    <sf:input type="text" class="form-control" id="pass-word" name="passWord"
+                                              path="password" placeholder="password" required="required"/>
+                                </div>
+                            </div>
+                                <div>
+                                    <input type="submit" class="btn btn-default" id="login-button" value="create user"/>
+                                </div>
+                        </sf:form>
                     </div>
                 </div>
-                
+
                 <script>
                     var contextPath = '${pageContext.request.contextPath}';
-                    
+
                     var user = '${pageContext.request.userPrincipal.name}';
                 </script>
             </div>
