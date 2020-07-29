@@ -16,8 +16,19 @@ public class User {
     
     private int id;
     private String username;
+    private String email;
     private String password;
     private ArrayList<String> authorities = new ArrayList<>();
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    
 
     public int getId() {
         return id;
@@ -53,11 +64,12 @@ public class User {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + this.id;
-        hash = 29 * hash + Objects.hashCode(this.username);
-        hash = 29 * hash + Objects.hashCode(this.password);
-        hash = 29 * hash + Objects.hashCode(this.authorities);
+        int hash = 3;
+        hash = 17 * hash + this.id;
+        hash = 17 * hash + Objects.hashCode(this.username);
+        hash = 17 * hash + Objects.hashCode(this.email);
+        hash = 17 * hash + Objects.hashCode(this.password);
+        hash = 17 * hash + Objects.hashCode(this.authorities);
         return hash;
     }
 
@@ -79,6 +91,9 @@ public class User {
         if (!Objects.equals(this.username, other.username)) {
             return false;
         }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
         if (!Objects.equals(this.password, other.password)) {
             return false;
         }
@@ -87,6 +102,6 @@ public class User {
         }
         return true;
     }
-    
-    
+
+
 }
