@@ -26,7 +26,7 @@ public class UserDaoDbImpl implements UserDao {
     }
     
     private static final String SQL_INSERT_USER
-            = "insert into users (username, password, enabled) values (?, ?, 1)";
+            = "insert into users (username, password, email, enabled) values (?, ?, ?, 1)";
     private static final String SQL_INSERT_AUTHORITY
             = "insert into authorities (username, authority) values (?, ?)";
     private static final String SQL_DELETE_USER
@@ -42,7 +42,8 @@ public class UserDaoDbImpl implements UserDao {
     public User addUser(User user) {
         jdbc.update(SQL_INSERT_USER,
                 user.getUsername(),
-                user.getPassword());
+                user.getPassword(),
+                user.getEmail());
         user.setId(jdbc.queryForObject("select LAST_INSERT_ID()", Integer.class));
         ArrayList<String> authorities = user.getAuthorities();
         for (String authority : authorities) {
@@ -94,6 +95,7 @@ public class UserDaoDbImpl implements UserDao {
             user.setId(rs.getInt("user_id"));
             user.setUsername(rs.getString("username"));
             user.setPassword(rs.getString("password"));
+            user.setEmail(rs.getString("email"));
             return user;
         }
     }

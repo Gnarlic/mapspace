@@ -15,6 +15,8 @@ import nt.application.mapspace.dao.LocationDaoDbImpl;
 import nt.application.mapspace.dao.UserDao;
 import nt.application.mapspace.model.Location;
 import nt.application.mapspace.model.User;
+import nt.application.mapspace.service.EmailService;
+import nt.application.mapspace.service.EmailServiceImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,20 +32,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class HomeController {
+
     @Inject
     LocationDao lDao;
     @Inject
     UserDao uDao;
-    
+    private EmailService eSvc = new EmailServiceImpl();
+
     //Initial page load -- adds Location object for spring form
-    @RequestMapping(value="/", method=RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String homePage(Model model) {
         model.addAttribute("location", new Location());
         return "index";
     }
-    
+
     //endpoint for ajax call for locations in db
-    @RequestMapping(value="/loadmap", method=RequestMethod.GET)
+    @RequestMapping(value = "/loadmap", method = RequestMethod.GET)
     @ResponseBody
     public List<Location> location(HttpServletRequest rq) {
         User user = uDao.getUser(rq.getParameter("user"));
@@ -52,15 +56,15 @@ public class HomeController {
         }
         return lDao.loadLocations(user.getId());
     }
-    
+
     //load user creation page
-    @RequestMapping(value="/createUser", method=RequestMethod.GET)
+    @RequestMapping(value = "/createUser", method = RequestMethod.GET)
     public String addUser(Model model) {
         model.addAttribute("user", new User());
         return "/user/createUser";
     }
-    
-    @RequestMapping(value="/addUser", method=RequestMethod.POST)
+
+    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     public String insertUser(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("user", new User());
@@ -74,11 +78,9 @@ public class HomeController {
             user.setAuthorities(authorities);
             uDao.addUser(user);
             model.addAttribute("location", new Location());
+            eSvc.userRegistrationSuccessEmail(user);
             return "index";
         }
     }
-    
-    
-    
-    
+
 }

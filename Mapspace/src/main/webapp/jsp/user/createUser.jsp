@@ -101,6 +101,11 @@
                                     <sf:input type="text" class="form-control" id="pass-word" name="passWord"
                                               path="password" placeholder="password" required="required"/>
                                 </div>
+                                <label for="e-mail" class="col-md-2 control-label">Email: </label>
+                                <div class="col-md-4">
+                                    <sf:input type="text" class="form-control" id="e-mail" name="eMail"
+                                              path="email" placeholder="email" required="required"/>
+                                </div>
                             </div>
                                 <div>
                                     <input type="submit" class="btn btn-default" id="login-button" value="create user"/>

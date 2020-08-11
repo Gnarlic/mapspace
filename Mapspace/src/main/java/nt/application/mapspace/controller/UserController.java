@@ -9,6 +9,8 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import nt.application.mapspace.dao.UserDao;
 import nt.application.mapspace.model.User;
+import nt.application.mapspace.service.EmailService;
+import nt.application.mapspace.service.EmailServiceImpl;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,7 @@ public class UserController {
     
     private UserDao uDao;
     private PasswordEncoder pwenc;
+
     
     @Inject
     public UserController(UserDao uDao, PasswordEncoder pwenc) {
